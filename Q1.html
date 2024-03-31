@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>String Replacement</title>
+</head>
+<body>
+
+<input type="text" id="replaceStringInput" placeholder="String to replace">
+<input type="text" id="replacementInput" placeholder="Replacement string">
+<button id="replaceButton">Replace</button>
+
+<p id="output">Output will appear here</p>
+
+<script>
+  // Step a: Selecting page elements
+  const replaceStringInput = document.getElementById('replaceStringInput');
+  const replacementInput = document.getElementById('replacementInput');
+  const replaceButton = document.getElementById('replaceButton');
+  const outputElement = document.getElementById('output');
+
+  // Step b: Adding event listener to the button
+  replaceButton.addEventListener('click', lookup);
+
+  // Step c-f: Creating the lookup function
+  function lookup() {
+    let s = outputElement.textContent;
+    let rt = replaceStringInput.value;
+    let replacement = replacementInput.value;
+
+    // Step d: Creating regex and checking for matches
+    let regex = new RegExp(rt, 'g'); // 'g' flag for global match
+    if (s.match(regex)) {
+      // Step e: Replacing matched text
+      let newString = s.replace(regex, replacement);
+      // Step f: Updating output area
+      outputElement.textContent = newString;
+    } else {
+      // If no match found
+      outputElement.textContent = "No matches found";
+    }
+  }
+</script>
+
+</body>
+</html>

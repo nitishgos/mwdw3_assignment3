@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<title>JavaScript Course</title>
+</head>
+<body>
+<div class="output"></div>
+<textarea name="txtarea" rows=2 cols=50></textarea>
+<button id="checkButton">Check</button>
+
+<textarea name="txtarea2" rows=2 cols=50></textarea>
+<button id="getEmailsButton">GetEmails</button>
+
+<script>
+  // Step a: Selecting elements
+  const textarea = document.querySelector('textarea[name="txtarea"]');
+  const outputTextarea = document.querySelector('textarea[name="txtarea2"]');
+  const checkButton = document.getElementById('checkButton');
+  const getEmailsButton = document.getElementById('getEmailsButton');
+
+  // Step b: Adding event listener to the button for checking email
+  checkButton.addEventListener('click', extractEmails);
+
+  // Step c, d, e: Function to extract email addresses
+  function extractEmails() {
+    const content = textarea.value;
+    const emailRegex = /[\w.-]+@[a-zA-Z-]+\.[a-zA-Z]{2,}/g;
+    const emails = content.match(emailRegex) || []; // Matches email addresses
+    const uniqueEmails = [...new Set(emails)]; // Removes duplicates
+
+    outputTextarea.value = uniqueEmails.join('\n'); // Step f: Outputting results
+  }
+
+  // Step b (second button): Adding event listener to the button for extracting emails
+  getEmailsButton.addEventListener('click', getEmails);
+
+  // Step c, d, e: Function to extract emails
+  function getEmails() {
+    const content = textarea.value;
+    const emailRegex = /[\w.-]+@[a-zA-Z-]+\.[a-zA-Z]{2,}/g;
+    const emails = content.match(emailRegex) || []; // Matches email addresses
+    const uniqueEmails = [...new Set(emails)]; // Removes duplicates
+
+    outputTextarea.value = uniqueEmails.join('\n'); // Step f: Outputting results
+  }
+</script>
+</body>
+</html>

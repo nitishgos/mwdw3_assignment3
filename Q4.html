@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fetch Data from XML using AJAX</title>
+<script>
+function fetchDataFromXML() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // Parse XML response
+            var xmlDoc = this.responseXML;
+
+            // Extract required data from XML
+            var items = xmlDoc.getElementsByTagName("item");
+            var output = "<ul>";
+            for (var i = 0; i < items.length; i++) {
+                var title = items[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
+                var description = items[i].getElementsByTagName("description")[0].childNodes[0].nodeValue;
+                output += "<li><strong>" + title + "</strong>: " + description + "</li>";
+            }
+            output += "</ul>";
+
+            // Display the extracted data on the webpage
+            document.getElementById("xmlData").innerHTML = output;
+        }
+    };
+    xhttp.open("GET", "your_xml_file.xml", true); // Replace "your_xml_file.xml" with the path to your XML file
+    xhttp.send();
+}
+</script>
+</head>
+<body>
+
+<h2>XML Data:</h2>
+<div id="xmlData"></div>
+
+<button onclick="fetchDataFromXML()">Fetch XML Data</button>
+
+</body>
+</html>

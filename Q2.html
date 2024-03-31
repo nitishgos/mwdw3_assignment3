@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Validator</title>
+  <style>
+    .output {
+      margin-top: 10px;
+    }
+    .valid {
+      color: green;
+    }
+    .invalid {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" id="emailInput" placeholder="Enter your email">
+  <button id="checkButton">Check</button>
+  <div class="output" id="output"></div>
+
+  <script>
+    // Selecting elements
+    const emailInput = document.getElementById('emailInput');
+    const outputDiv = document.getElementById('output');
+    const checkButton = document.getElementById('checkButton');
+
+    // Adding event listener to the button
+    checkButton.addEventListener('click', function() {
+      // Getting current value from the input field
+      const inputValue = emailInput.value.trim();
+
+      // Regular expression for email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      // Blank response value
+      let response = '';
+
+      // Test with input value and email format regex
+      if (!emailRegex.test(inputValue)) {
+        // If test result is false
+        response = 'Invalid Email';
+        outputDiv.classList.add('invalid');
+        outputDiv.classList.remove('valid');
+      } else {
+        // If test result is true
+        response = 'Email format is correct';
+        outputDiv.classList.add('valid');
+        outputDiv.classList.remove('invalid');
+      }
+
+      // Output the response value into the output element
+      outputDiv.textContent = response;
+    });
+  </script>
+</body>
+</html>
